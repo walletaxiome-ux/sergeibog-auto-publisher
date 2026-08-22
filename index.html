@@ -1,44 +1,476 @@
-```html
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="app-icon.svg">
+
     <title>SERGEIBOG AUTO PUBLISHER</title>
-    <meta name="description" content="SERGEIBOG AUTO PUBLISHER — automated video content management and publishing platform.">
+
+    <meta
+        name="description"
+        content="SERGEIBOG AUTO PUBLISHER is a platform for managing video content, publication schedules, connected social media accounts and publishing workflows."
+    >
+
+    <style>
+        :root {
+            --bg: #0b0d12;
+            --surface: #141821;
+            --surface-2: #1b202b;
+            --text: #f5f7fa;
+            --muted: #aeb6c3;
+            --accent: #ffffff;
+            --border: #2b3240;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            color: var(--text);
+        }
+
+        .container {
+            width: min(1120px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border);
+            background: rgba(11, 13, 18, 0.96);
+        }
+
+        .header-inner {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        nav a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover,
+        nav a:focus {
+            color: var(--text);
+        }
+
+        main {
+            padding-bottom: 80px;
+        }
+
+        .hero {
+            padding: 96px 0 72px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--muted);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            max-width: 900px;
+            margin: 0 0 24px;
+            font-size: clamp(2.6rem, 7vw, 5.8rem);
+            line-height: 0.98;
+            letter-spacing: -0.055em;
+        }
+
+        .hero p {
+            max-width: 760px;
+            margin: 0;
+            color: var(--muted);
+            font-size: 1.2rem;
+        }
+
+        section {
+            padding: 72px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        h2 {
+            margin: 0 0 18px;
+            font-size: 2rem;
+            letter-spacing: -0.025em;
+        }
+
+        .section-intro {
+            max-width: 760px;
+            color: var(--muted);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 36px;
+        }
+
+        .card {
+            padding: 28px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .steps {
+            display: grid;
+            gap: 16px;
+            margin-top: 36px;
+        }
+
+        .step {
+            display: grid;
+            grid-template-columns: 64px 1fr;
+            gap: 20px;
+            padding: 24px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+        }
+
+        .step-number {
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+
+        .step h3 {
+            margin: 0 0 6px;
+        }
+
+        .step p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .notice {
+            margin-top: 32px;
+            padding: 24px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            color: var(--muted);
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 32px 0;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+        }
+
+        .copyright {
+            color: var(--muted);
+        }
+
+        @media (max-width: 800px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-inner {
+                align-items: flex-start;
+                flex-direction: column;
+                padding: 18px 0;
+            }
+
+            .hero {
+                padding-top: 64px;
+            }
+
+            .step {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <main>
-        <h1>SERGEIBOG AUTO PUBLISHER</h1>
 
-        <p>
-            SERGEIBOG AUTO PUBLISHER is a video content management and
-            publishing platform designed to simplify social media workflows.
-        </p>
+<header>
+    <div class="container header-inner">
+        <a class="brand" href="index.html">
+    <img src="app-icon.svg" alt="SERGEIBOG AUTO PUBLISHER app icon" width="40" height="40">
+    <span>SERGEIBOG AUTO PUBLISHER</span>
+</a>
 
-        <p>
-            The application helps users manage video content, publication
-            schedules, connected social media accounts and publishing workflows
-            from one system.
-        </p>
-
-        <h2>TikTok Integration</h2>
-
-        <p>
-            Users can connect their TikTok account through TikTok Login Kit
-            and authorize supported content publishing features.
-        </p>
-
-        <nav>
-            <a href="terms.html">Terms of Service</a>
-            |
+        <nav aria-label="Main navigation">
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#tiktok">TikTok Integration</a>
             <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
         </nav>
+    </div>
+</header>
 
-        <p>
+<main>
+
+    <section class="hero">
+        <div class="container">
+            <span class="eyebrow">Video Content Management Platform</span>
+
+            <h1>Manage your video publishing workflow from one system.</h1>
+
+            <p>
+                SERGEIBOG AUTO PUBLISHER helps users organize video content,
+                publication schedules, connected social media accounts and
+                publishing workflows in one centralized platform.
+            </p>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="container">
+            <h2>Platform Features</h2>
+
+            <p class="section-intro">
+                The platform is designed to simplify repetitive video
+                publishing tasks while keeping users in control of their
+                content and connected accounts.
+            </p>
+
+            <div class="grid">
+
+                <article class="card">
+                    <h3>Video Management</h3>
+                    <p>
+                        Organize video files and prepare publication metadata
+                        such as titles, descriptions and hashtags.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <h3>Publication Scheduling</h3>
+                    <p>
+                        Manage planned publication times and organize content
+                        into a structured publishing workflow.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <h3>Connected Accounts</h3>
+                    <p>
+                        Manage authorized social media connections used for
+                        publishing workflows requested by the user.
+                    </p>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+
+            <p class="section-intro">
+                SERGEIBOG AUTO PUBLISHER is designed around a simple,
+                user-controlled publishing process.
+            </p>
+
+            <div class="steps">
+
+                <article class="step">
+                    <div class="step-number">01</div>
+                    <div>
+                        <h3>Prepare Content</h3>
+                        <p>
+                            The user selects video content and prepares the
+                            publication information required for the selected
+                            publishing workflow.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="step">
+                    <div class="step-number">02</div>
+                    <div>
+                        <h3>Connect an Account</h3>
+                        <p>
+                            The user authorizes a supported social platform
+                            when an integration requires account access.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="step">
+                    <div class="step-number">03</div>
+                    <div>
+                        <h3>Manage the Workflow</h3>
+                        <p>
+                            The user manages publication status, scheduling
+                            and content information through the platform.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="step">
+                    <div class="step-number">04</div>
+                    <div>
+                        <h3>Publish</h3>
+                        <p>
+                            Authorized publishing actions are performed using
+                            the connected platform integration.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="tiktok">
+        <div class="container">
+            <h2>TikTok Integration</h2>
+
+            <p class="section-intro">
+                SERGEIBOG AUTO PUBLISHER can integrate with TikTok to support
+                authorized publishing workflows. Users initiate the
+                connection and grant permissions through the official TikTok
+                authorization flow.
+            </p>
+
+            <div class="notice">
+                SERGEIBOG AUTO PUBLISHER is an independent software platform.
+                It is not owned by, operated by, or affiliated with TikTok.
+                TikTok is a trademark of its respective owner.
+            </div>
+        </div>
+    </section>
+
+    <section id="privacy">
+        <div class="container">
+            <h2>Legal & Privacy</h2>
+
+            <p class="section-intro">
+                Information about how the service handles user information,
+                connected accounts and user content is available in the
+                following documents.
+            </p>
+
+            <div class="grid">
+
+                <article class="card">
+                    <h3>Privacy Policy</h3>
+                    <p>
+                        Read how information may be collected, used,
+                        protected and retained.
+                    </p>
+                    <p>
+                        <a href="privacy.html">Read Privacy Policy</a>
+                    </p>
+                </article>
+
+                <article class="card">
+                    <h3>Terms of Service</h3>
+                    <p>
+                        Review the terms governing use of the SERGEIBOG AUTO
+                        PUBLISHER service.
+                    </p>
+                    <p>
+                        <a href="terms.html">Read Terms of Service</a>
+                    </p>
+                </article>
+
+                <article class="card">
+                    <h3>Contact</h3>
+                    <p>
+                        For service, privacy or legal questions, contact:
+                        <a href="mailto:natascha55@yahoo.de">natascha55@yahoo.de</a>.
+                    </p>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <div class="container footer-inner">
+
+        <div class="copyright">
             © 2026 SERGEIBOG AUTO PUBLISHER
-        </p>
-    </main>
+        </div>
+
+        <div class="footer-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+        </div>
+
+    </div>
+</footer>
+
 </body>
 </html>
-```
+
+
+

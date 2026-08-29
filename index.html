@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="icon" type="image/svg+xml" href="app-icon.svg">
 
     <title>SERGEIBOG AUTO PUBLISHER</title>
 
     <meta
         name="description"
-        content="SERGEIBOG AUTO PUBLISHER is a platform for managing video content, publication schedules, connected social media accounts and publishing workflows."
+        content="SERGEIBOG AUTO PUBLISHER is a video content management and publishing workflow platform with TikTok integration."
     >
 
     <style>
@@ -21,6 +22,8 @@
             --muted: #aeb6c3;
             --accent: #ffffff;
             --border: #2b3240;
+            --success: #72d6a1;
+            --warning: #f0c674;
         }
 
         * {
@@ -48,14 +51,18 @@
             color: var(--text);
         }
 
+        button {
+            font: inherit;
+        }
+
         .container {
-            width: min(1120px, calc(100% - 40px));
+            width: min(1160px, calc(100% - 40px));
             margin: 0 auto;
         }
 
         header {
             border-bottom: 1px solid var(--border);
-            background: rgba(11, 13, 18, 0.96);
+            background: rgba(11, 13, 18, 0.97);
         }
 
         .header-inner {
@@ -75,16 +82,21 @@
             text-decoration: none;
         }
 
+        .brand img {
+            width: 40px;
+            height: 40px;
+        }
+
         nav {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 18px;
         }
 
         nav a {
             color: var(--muted);
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
         }
 
         nav a:hover,
@@ -97,32 +109,59 @@
         }
 
         .hero {
-            padding: 96px 0 72px;
+            padding: 88px 0 64px;
         }
 
         .eyebrow {
             display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             color: var(--muted);
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 700;
             letter-spacing: 0.14em;
             text-transform: uppercase;
         }
 
         h1 {
-            max-width: 900px;
+            max-width: 920px;
             margin: 0 0 24px;
-            font-size: clamp(2.6rem, 7vw, 5.8rem);
+            font-size: clamp(2.7rem, 7vw, 5.8rem);
             line-height: 0.98;
             letter-spacing: -0.055em;
         }
 
         .hero p {
-            max-width: 760px;
+            max-width: 780px;
             margin: 0;
             color: var(--muted);
-            font-size: 1.2rem;
+            font-size: 1.18rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 0 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .button.primary {
+            background: var(--accent);
+            color: #0b0d12;
+            border-color: var(--accent);
         }
 
         section {
@@ -136,8 +175,12 @@
             letter-spacing: -0.025em;
         }
 
+        h3 {
+            margin-top: 0;
+        }
+
         .section-intro {
-            max-width: 760px;
+            max-width: 780px;
             color: var(--muted);
         }
 
@@ -149,19 +192,196 @@
         }
 
         .card {
-            padding: 28px;
+            padding: 26px;
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 16px;
         }
 
-        .card h3 {
-            margin-top: 0;
-            margin-bottom: 12px;
-        }
-
         .card p {
             margin: 0;
+            color: var(--muted);
+        }
+
+        /* Product dashboard */
+
+        .dashboard {
+            margin-top: 42px;
+            padding: 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        .dashboard-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 4px 4px 20px;
+        }
+
+        .dashboard-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+
+        .demo-label {
+            color: var(--muted);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.7fr 1fr;
+            gap: 16px;
+        }
+
+        .panel {
+            padding: 22px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+        }
+
+        .panel h3 {
+            margin-bottom: 16px;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 5px 9px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            color: var(--muted);
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .status.ready {
+            color: var(--success);
+        }
+
+        .status.scheduled {
+            color: var(--warning);
+        }
+
+        .video-row {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            align-items: center;
+            gap: 18px;
+            padding: 15px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .video-row:first-of-type {
+            border-top: 0;
+        }
+
+        .video-name {
+            font-weight: 700;
+        }
+
+        .video-meta {
+            color: var(--muted);
+            font-size: 0.84rem;
+        }
+
+        .account {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .account-icon {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+            background: #000;
+            border: 1px solid var(--border);
+            font-weight: 900;
+        }
+
+        .account-name {
+            font-weight: 800;
+        }
+
+        .account-state {
+            color: var(--muted);
+            font-size: 0.82rem;
+        }
+
+        .workflow {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .workflow-step {
+            padding: 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .workflow-number {
+            color: var(--muted);
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
+        .workflow-step strong {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+
+        .metadata {
+            display: grid;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .metadata-item {
+            padding: 13px 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+        }
+
+        .metadata-label {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--muted);
+            font-size: 0.76rem;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+        }
+
+        .metadata-value {
+            font-weight: 700;
+        }
+
+        .notice {
+            margin-top: 24px;
+            padding: 20px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
             color: var(--muted);
         }
 
@@ -195,15 +415,6 @@
             color: var(--muted);
         }
 
-        .notice {
-            margin-top: 32px;
-            padding: 24px;
-            background: var(--surface-2);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            color: var(--muted);
-        }
-
         footer {
             border-top: 1px solid var(--border);
             padding: 32px 0;
@@ -222,19 +433,26 @@
             gap: 18px;
         }
 
-        .footer-links a {
-            color: var(--muted);
-        }
-
+        .footer-links a,
         .copyright {
             color: var(--muted);
         }
 
-        @media (max-width: 800px) {
-            .grid {
+        @media (max-width: 900px) {
+            .dashboard-grid {
                 grid-template-columns: 1fr;
             }
 
+            .workflow {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
             .header-inner {
                 align-items: flex-start;
                 flex-direction: column;
@@ -242,7 +460,16 @@
             }
 
             .hero {
-                padding-top: 64px;
+                padding-top: 60px;
+            }
+
+            .video-row {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .workflow {
+                grid-template-columns: 1fr;
             }
 
             .step {
@@ -257,11 +484,17 @@
 <header>
     <div class="container header-inner">
         <a class="brand" href="index.html">
-    <img src="app-icon.svg" alt="SERGEIBOG AUTO PUBLISHER app icon" width="40" height="40">
-    <span>SERGEIBOG AUTO PUBLISHER</span>
-</a>
+            <img
+                src="app-icon.svg"
+                alt="SERGEIBOG AUTO PUBLISHER app icon"
+                width="40"
+                height="40"
+            >
+            <span>SERGEIBOG AUTO PUBLISHER</span>
+        </a>
 
         <nav aria-label="Main navigation">
+            <a href="#dashboard">Dashboard</a>
             <a href="#features">Features</a>
             <a href="#how-it-works">How It Works</a>
             <a href="#tiktok">TikTok Integration</a>
@@ -277,18 +510,167 @@
         <div class="container">
             <span class="eyebrow">Video Content Management Platform</span>
 
-            <h1>Manage your video publishing workflow from one system.</h1>
+            <h1>
+                Manage your video publishing workflow from one system.
+            </h1>
 
             <p>
                 SERGEIBOG AUTO PUBLISHER helps users organize video content,
                 publication schedules, connected social media accounts and
                 publishing workflows in one centralized platform.
             </p>
+
+            <div class="hero-actions">
+                <a class="button primary" href="#dashboard">
+                    Open Publishing Dashboard
+                </a>
+
+                <a class="button" href="#tiktok">
+                    View TikTok Integration
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="dashboard">
+        <div class="container">
+
+            <h2>Publishing Dashboard</h2>
+
+            <p class="section-intro">
+                A centralized workspace for preparing video content,
+                managing publication metadata, monitoring scheduled items
+                and working with authorized platform integrations.
+            </p>
+
+            <div class="dashboard">
+
+                <div class="dashboard-top">
+                    <div>
+                        <div class="dashboard-title">
+                            Content &amp; Publishing
+                        </div>
+                        <div class="demo-label">
+                            Product interface demonstration
+                        </div>
+                    </div>
+
+                    <span class="status ready">
+                        ● Workflow Ready
+                    </span>
+                </div>
+
+                <div class="dashboard-grid">
+
+                    <div class="panel">
+                        <h3>Publication Queue</h3>
+
+                        <div class="video-row">
+                            <div>
+                                <div class="video-name">Video 001 — Product Demo</div>
+                                <div class="video-meta">1080 × 1920 · MP4</div>
+                            </div>
+                            <span class="status ready">Ready</span>
+                            <div class="video-meta">Today</div>
+                        </div>
+
+                        <div class="video-row">
+                            <div>
+                                <div class="video-name">Video 002 — Campaign Short</div>
+                                <div class="video-meta">1080 × 1920 · MP4</div>
+                            </div>
+                            <span class="status scheduled">Scheduled</span>
+                            <div class="video-meta">Tomorrow</div>
+                        </div>
+
+                        <div class="video-row">
+                            <div>
+                                <div class="video-name">Video 003 — Brand Story</div>
+                                <div class="video-meta">1080 × 1920 · MP4</div>
+                            </div>
+                            <span class="status">Draft</span>
+                            <div class="video-meta">—</div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <h3>Connected Account</h3>
+
+                        <div class="account">
+                            <div class="account-icon">T</div>
+
+                            <div>
+                                <div class="account-name">TikTok</div>
+                                <div class="account-state">
+                                    Authorization required
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metadata">
+                            <div class="metadata-item">
+                                <span class="metadata-label">Publishing Mode</span>
+                                <span class="metadata-value">Authorized workflow</span>
+                            </div>
+
+                            <div class="metadata-item">
+                                <span class="metadata-label">Content</span>
+                                <span class="metadata-value">Video + metadata</span>
+                            </div>
+
+                            <div class="metadata-item">
+                                <span class="metadata-label">Control</span>
+                                <span class="metadata-value">User initiated</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel" style="margin-top:16px;">
+                    <h3>Publishing Workflow</h3>
+
+                    <div class="workflow">
+                        <div class="workflow-step">
+                            <span class="workflow-number">01</span>
+                            <strong>Select Video</strong>
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="workflow-number">02</span>
+                            <strong>Add Metadata</strong>
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="workflow-number">03</span>
+                            <strong>Authorize Account</strong>
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="workflow-number">04</span>
+                            <strong>Schedule</strong>
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="workflow-number">05</span>
+                            <strong>Publish</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notice">
+                    This page presents the product interface and workflow.
+                    Platform authorization and publishing actions require
+                    the applicable backend integration and user authorization.
+                </div>
+
+            </div>
         </div>
     </section>
 
     <section id="features">
         <div class="container">
+
             <h2>Platform Features</h2>
 
             <p class="section-intro">
@@ -323,12 +705,37 @@
                     </p>
                 </article>
 
+                <article class="card">
+                    <h3>Content Queue</h3>
+                    <p>
+                        Review prepared videos and monitor their publication
+                        state before authorized publishing actions.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <h3>Metadata Management</h3>
+                    <p>
+                        Prepare titles, descriptions and hashtags together
+                        with each selected video.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <h3>Publishing Workflow</h3>
+                    <p>
+                        Move content through preparation, authorization,
+                        scheduling and publishing stages.
+                    </p>
+                </article>
+
             </div>
         </div>
     </section>
 
     <section id="how-it-works">
         <div class="container">
+
             <h2>How It Works</h2>
 
             <p class="section-intro">
@@ -389,6 +796,7 @@
 
     <section id="tiktok">
         <div class="container">
+
             <h2>TikTok Integration</h2>
 
             <p class="section-intro">
@@ -398,17 +806,48 @@
                 authorization flow.
             </p>
 
+            <div class="grid">
+
+                <article class="card">
+                    <h3>Login Kit</h3>
+                    <p>
+                        Users can authorize the application through the
+                        applicable TikTok authorization process.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <h3>Content Posting API</h3>
+                    <p>
+                        Authorized workflows can prepare video content for
+                        publishing through the applicable TikTok API.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <h3>Publishing Options</h3>
+                    <p>
+                        Depending on approved permissions and enabled
+                        capabilities, content can be prepared for direct
+                        posting or draft workflows.
+                    </p>
+                </article>
+
+            </div>
+
             <div class="notice">
                 SERGEIBOG AUTO PUBLISHER is an independent software platform.
                 It is not owned by, operated by, or affiliated with TikTok.
                 TikTok is a trademark of its respective owner.
             </div>
+
         </div>
     </section>
 
     <section id="privacy">
         <div class="container">
-            <h2>Legal & Privacy</h2>
+
+            <h2>Legal &amp; Privacy</h2>
 
             <p class="section-intro">
                 Information about how the service handles user information,
@@ -424,19 +863,23 @@
                         Read how information may be collected, used,
                         protected and retained.
                     </p>
-                    <p>
-                        <a href="privacy.html">Read Privacy Policy</a>
+                    <p style="margin-top:16px;">
+                        <a href="privacy.html">
+                            Read Privacy Policy
+                        </a>
                     </p>
                 </article>
 
                 <article class="card">
                     <h3>Terms of Service</h3>
                     <p>
-                        Review the terms governing use of the SERGEIBOG AUTO
-                        PUBLISHER service.
+                        Review the terms governing use of the
+                        SERGEIBOG AUTO PUBLISHER service.
                     </p>
-                    <p>
-                        <a href="terms.html">Read Terms of Service</a>
+                    <p style="margin-top:16px;">
+                        <a href="terms.html">
+                            Read Terms of Service
+                        </a>
                     </p>
                 </article>
 
@@ -444,7 +887,11 @@
                     <h3>Contact</h3>
                     <p>
                         For service, privacy or legal questions, contact:
-                        <a href="mailto:natascha55@yahoo.de">natascha55@yahoo.de</a>.
+                    </p>
+                    <p style="margin-top:16px;">
+                        <a href="mailto:natascha55@yahoo.de">
+                            natascha55@yahoo.de
+                        </a>
                     </p>
                 </article>
 
@@ -464,6 +911,7 @@
         <div class="footer-links">
             <a href="privacy.html">Privacy Policy</a>
             <a href="terms.html">Terms of Service</a>
+            <a href="#dashboard">Dashboard</a>
         </div>
 
     </div>
@@ -471,6 +919,3 @@
 
 </body>
 </html>
-
-
-
